@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<!--
+================================================================================
+  SITE PORTFOLIO — Souleymane Maman Moustapha
+================================================================================
+
+  👋 BONJOUR ! Ce fichier est ton site. Il est écrit pour que TU puisses le
+  modifier toi-même, même sans rien connaître en code.
+
+  ┌──────────────────────────────────────────────────────────────────────┐
+  │  COMMENT LIRE CE FICHIER ?                                             │
+  │                                                                        │
+  │  • Le texte gris comme cette note = une explication pour TOI.         │
+  │    Ça ne s'affiche PAS sur le vrai site, c'est juste pour t'aider.     │
+  │                                                                        │
+  │  • Tout ce qui est entre  /*  et  */  = aussi une NOTE (côté style).   │
+  │                                                                        │
+  │  • Le site est découpé en BLOCS. Chaque bloc a :                       │
+  │      1) sa partie STYLE  (entre <style> ... </style>)  → l'apparence   │
+  │      2) sa partie HTML   (le contenu visible)          → le texte      │
+  │    Les deux sont placés JUSTE L'UN À CÔTÉ DE L'AUTRE.                  │
+  │                                                                        │
+  │  • Le petit symbole  👈  pointe les lignes que tu modifies le plus     │
+  │    souvent (taille, couleur, texte...).                                │
+  └──────────────────────────────────────────────────────────────────────┘
+
+  GESTES UTILES DANS VISUAL STUDIO CODE :
+  • Enregistrer :        Ctrl + S
+  • Annuler une erreur : Ctrl + Z
+  • Chercher/Remplacer : Ctrl + H   (ex : remplacer une couleur partout)
+  • Voir le site :       clic droit sur le fichier → "Open with Live Server"
+                         (ou ouvre index.html dans ton navigateur)
+
+  RÈGLE D'OR : modifie UNE chose, enregistre (Ctrl+S), regarde le résultat.
+  Si ça casse → Ctrl + Z pour revenir en arrière.
+================================================================================
+-->
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 👈 TITRE affiché dans l'onglet du navigateur. Change le texte ci-dessous. -->
+  <title>Souleymane Maman Moustapha — Analyste Financier &amp; Data</title>
+
+  <!-- Petite description pour Google (invisible sur la page). -->
+  <meta name="description" content="Analyste financier & data. Je conçois des tableaux de bord clairs et des modèles financiers pour guider dirigeants et investisseurs.">
+
+  <!--
+    LES POLICES D'ÉCRITURE (gratuites, fournies par Google).
+    On en utilise 2 :
+      • Schibsted Grotesk  → pour les TITRES
+      • Hanken Grotesk     → pour les TEXTES normaux
+    Si tu veux d'autres polices, va sur https://fonts.google.com, choisis-en
+    une, et remplace les noms ici ET dans les "réglages globaux" plus bas.
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Schibsted+Grotesk:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+
+  <!-- ╔══════════════════════════════════════════════════════════════════╗
+       ║  RÉGLAGES GLOBAUX  (couleurs, polices, fond de la page)            ║
+       ║  👉 C'est ICI que tu changes les couleurs/polices de TOUT le site. ║
+       ╚══════════════════════════════════════════════════════════════════╝ -->
+  <style>
+
+    /* ----------------------------------------------------------------------
+       1) LA PALETTE DE COULEURS DU SITE
+       ----------------------------------------------------------------------
+       Chaque couleur a un "surnom" (ex: --violet) et un code (ex: #6D28D9).
+       👉 Pour changer une couleur PARTOUT sur le site : change juste le code
+          ici, à droite du surnom. Tout se met à jour automatiquement.
+
+       Un code couleur ressemble à #6D28D9 (un # suivi de 6 caractères).
+       Pour trouver un code couleur : tape "color picker" dans Google.
+    ---------------------------------------------------------------------- */
+    :root {
+      --violet-fonce:      #4C1D95;  /* violet très foncé (dégradés, bouton) */
+      --violet:            #6D28D9;  /* 👈 LA couleur principale du site      */
+      --violet-moyen:      #7C3AED;  /* violet moyen                          */
+      --violet-clair:      #8B5CF6;  /* violet clair                          */
+      --violet-pastel:     #A78BFA;  /* violet pastel (reflets)               */
+      --violet-tres-clair: #EDE6FB;  /* fond doux pour petites pastilles      */
+      --fond-page:         #F4EEFC;  /* couleur tout en bas du fond           */
+
+      --texte-fonce:       #241046;  /* 👈 couleur des TITRES                  */
+      --texte:             #5B5470;  /* 👈 couleur des PARAGRAPHES             */
+      --texte-gris:        #968CAE;  /* couleur des petits labels gris        */
+      --blanc:             #FFFFFF;
+
+      --vert:              #16A34A;  /* texte "Disponible"                    */
+      --vert-point:        #22C55E;  /* le petit point vert                   */
+
+      /* LES POLICES (voir explication tout en haut dans <head>) */
+      --police-titres:     'Schibsted Grotesk', sans-serif; /* 👈 police des titres */
+      --police-texte:      'Hanken Grotesk', sans-serif;    /* 👈 police des textes */
+    }
+
+    /* ----------------------------------------------------------------------
+       2) RÉGLAGES DE BASE — (technique, pas besoin d'y toucher en général)
+       "* { }" veut dire "tous les éléments". On remet les marges à zéro
+       pour partir d'une base propre.
+    ---------------------------------------------------------------------- */
+    *, *::before, *::after {
+      box-sizing: border-box;  /* fait que la taille inclut les bordures (plus simple) */
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth; /* défilement doux quand on clique sur un lien #ancre */
+    }
+
+    /* LE FOND DE LA PAGE ENTIÈRE */
+    body {
+      font-family: var(--police-texte);  /* police par défaut de tout le texte */
+      color: var(--texte-fonce);
+      min-height: 100vh;                 /* au moins la hauteur de l'écran */
+      overflow-x: hidden;                /* empêche une barre de défilement horizontale */
+      -webkit-font-smoothing: antialiased;
+
+      /* Le fond = un dégradé blanc → violet pâle, + 2 halos violets décoratifs.
+         👉 Pour un fond uni blanc : remplace tout le "background" par :
+            background: #ffffff; */
+      background:
+        radial-gradient(740px 520px at 86% -8%, rgba(124,58,237,.16), transparent 60%),
+        radial-gradient(620px 520px at 6% 110%, rgba(58,33,86,.10), transparent 66%),
+        linear-gradient(180deg, #ffffff 0%, var(--fond-page) 100%);
+    }
+
+    a   { text-decoration: none; color: inherit; } /* enlève le soulignement des liens */
+    img { display: block; max-width: 100%; }       /* images propres et responsives */
+
+    /* LE "CONTENEUR" : garde le contenu centré et pas trop large sur grand écran. */
+    .container {
+      width: 100%;
+      max-width: 1280px;            /* 👈 largeur maximale du contenu */
+      margin: 0 auto;               /* centre horizontalement */
+      padding: 0 clamp(18px, 4vw, 48px); /* marge sur les côtés (s'adapte à l'écran) */
+    }
+
+    /* ----------------------------------------------------------------------
+       3) LES ANIMATIONS (les mouvements automatiques)
+       Ces "@keyframes" décrivent des mouvements. Tu n'as PAS besoin d'y
+       toucher. Pour CHANGER LA VITESSE d'une animation, va plutôt sur la
+       ligne "animation: ..." du bloc concerné (ex: les cartes flottantes).
+    ---------------------------------------------------------------------- */
+    @keyframes flottement {       /* monte et descend doucement (cartes) */
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-10px); }
+    }
+    @keyframes pulsation {        /* le point vert "Disponible" qui pulse */
+      0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,.5); }
+      50%      { box-shadow: 0 0 0 5px rgba(34,197,94,0); }
+    }
+    @keyframes dessine-jauge {    /* la jauge ronde 94% qui se remplit */
+      to { stroke-dashoffset: 13.6; }
+    }
+
+    /* Accessibilité : si la personne a désactivé les animations sur son
+       appareil, on les coupe. (À garder, c'est une bonne pratique.) */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+      }
+    }
+
+    /* Joli cadre violet quand on navigue au clavier (accessibilité). */
+    :focus-visible { outline: 3px solid var(--violet-pastel); outline-offset: 3px; border-radius: 6px; }
+  </style>
+</head>
+
+
+<body>
+
+  <!-- ╔══════════════════════════════════════════════════════════════════╗
+       ║  BLOC 1 — BARRE DE NAVIGATION (le menu flottant en haut)           ║
+       ╚══════════════════════════════════════════════════════════════════╝ -->
+
+  <!-- ░░░ STYLE DU BLOC 1 (apparence de la barre du haut) ░░░ -->
+  <style>
+    /* Le "support" qui colle la barre en haut et la garde visible au défilement. */
+    .nav-shell {
+      position: fixed;            /* reste collée en haut même quand on descend */
+      top: clamp(12px, 2vw, 22px);/* 👈 distance depuis le haut de l'écran */
+      left: 0; right: 0;
+      z-index: 100;               /* passe au-dessus du reste */
+      display: flex;
+      justify-content: center;    /* centre la barre horizontalement */
+      padding: 0 16px;
+      pointer-events: none;       /* (technique) laisse cliquer "à travers" le support */
+    }
+
+    /* La "pilule" violette foncée elle-même. */
+    .nav {
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      gap: 70px;                   /* espace entre logo / liens / bouton */
+      padding: 7px 7px 7px 14px;
+      border-radius: 999px;       /* 👈 arrondi des coins (999px = tout rond) */
+      background: linear-gradient(135deg, rgba(40,18,84,.86), rgba(24,10,52,.86)); /* 👈 couleur de la barre */
+      backdrop-filter: blur(20px) saturate(160%);          /* effet verre dépoli */
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border: 1px solid rgba(167,139,250,.20);
+      box-shadow: 0 20px 50px rgba(20,8,45,.42), inset 0 1px 0 rgba(255,255,255,.08);
+    }
+
+    /* Le logo (carré "SMM" + prénom) */
+    .nav__brand { display: flex; align-items: center; gap: 10px; padding-right: 6px; }
+    .nav__mark {
+      width: 34px; height: 34px;            /* 👈 taille du carré logo */
+      flex-shrink: 0;
+      border-radius: 11px;
+      background: linear-gradient(140deg, var(--violet-pastel), var(--violet) 70%);
+      display: grid; place-items: center;   /* centre le texte "SMM" dedans */
+      color: var(--blanc);
+      font-family: var(--police-titres);
+      font-weight: 800;
+      font-size: 13px;                      /* 👈 taille du texte "SMM" */
+      box-shadow: 0 6px 16px rgba(124,58,237,.5), inset 0 1px 0 rgba(255,255,255,.4);
+    }
+    .nav__name {
+      color: var(--blanc);
+      font-family: var(--police-titres);
+      font-weight: 700;
+      font-size: 14.5px;                    /* 👈 taille du prénom dans la barre */
+    }
+
+    /* Les liens du menu (Accueil, À propos...) */
+    .nav__links { display: flex; align-items: center; gap: 2px; list-style: none; margin: 0 2px; }
+    .nav__links a {
+      display: block;
+      padding: 9px 15px;
+      border-radius: 999px;
+      color: rgba(255,255,255,.74);         /* 👈 couleur des liens (blanc transparent) */
+      font-size: 14px;                    /* 👈 taille des liens du menu */
+      font-weight: 500;
+      white-space: nowrap;
+      transition: color .25s, background .25s, box-shadow .25s; /* transition douce au survol */
+    }
+    /* Au passage de la souris sur un lien : */
+    .nav__links a:hover { color: #fff; background: rgba(167,139,250,.16); }
+    /* Le lien de la page ACTUELLE (mis en avant) : */
+    .nav__links a.is-active {
+      color: #fff;
+      background: linear-gradient(135deg, rgba(139,92,246,.40), rgba(109,40,217,.40));
+      box-shadow: inset 0 0 0 1px rgba(196,181,253,.5), 0 6px 20px rgba(124,58,237,.5);
+    }
+
+    /* Le bouton "Me contacter" (violet plein) */
+    .nav__cta {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 10px 19px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--violet-clair), var(--violet)); /* 👈 couleur du bouton */
+      color: #fff;
+      font-size: 13.5px; font-weight: 600;  /* 👈 taille / épaisseur du texte du bouton */
+      white-space: nowrap;
+      box-shadow: 0 8px 22px rgba(124,58,237,.5), inset 0 1px 0 rgba(255,255,255,.25);
+      transition: transform .25s, box-shadow .25s, filter .25s;
+    }
+    .nav__cta:hover { transform: translateY(-1px); filter: brightness(1.06); }
+    .nav__cta svg { width: 14px; height: 14px; }
+
+    /* Le bouton "hamburger" (les 3 traits) — visible seulement sur téléphone */
+    .nav__burger {
+      display: none;                        /* caché sur ordinateur (réapparaît sur petit écran) */
+      width: 40px; height: 40px; border: none;
+      border-radius: 999px; background: rgba(167,139,250,.16); cursor: pointer;
+      position: relative;
+    }
+    .nav__burger span,
+    .nav__burger span::before,
+    .nav__burger span::after {
+      content: ''; position: absolute;
+      width: 17px; height: 2px; background: #fff; border-radius: 2px;
+      transition: transform .3s, opacity .2s;
+    }
+    .nav__burger span { left: 50%; top: 50%; transform: translate(-50%, -50%); }
+    .nav__burger span::before { top: -6px; left: 0; }
+    .nav__burger span::after  { top: 6px;  left: 0; }
+    .nav.is-open .nav__burger span { background: transparent; }       /* croix quand ouvert */
+    .nav.is-open .nav__burger span::before { transform: translateY(6px) rotate(45deg); }
+    .nav.is-open .nav__burger span::after  { transform: translateY(-6px) rotate(-45deg); }
+
+    /* Le panneau de menu qui s'ouvre sur téléphone (caché par défaut) */
+    .nav__panel { display: none; }
+  </style>
+
+  <!-- ░░░ CONTENU DU BLOC 1 (ce qui s'affiche) ░░░ -->
+  <div class="nav-shell">
+    <nav class="nav" id="nav">
+
+      <!-- LE LOGO : "SMM" = tes initiales. 👉 Change-les si tu veux.
+           "Souleymane" = le prénom affiché à côté. 👉 Change ou efface ce mot. -->
+      
+
+      <!-- LES LIENS DU MENU.
+           👉 Pour RENOMMER un lien : change le texte entre > et </a>.
+           👉 Pour SUPPRIMER un lien : efface toute sa ligne <li>...</li>.
+           Le "href=#..." dit vers quelle section le lien descend. -->
+      <ul class="nav__links">
+        <li><a href="#top" class="is-active">Accueil</a></li>
+        <li><a href="#apropos">À propos</a></li>
+        <li><a href="#competences">Compétences</a></li>
+        <li><a href="#projets">Projets</a></li>
+      </ul>
+
+      <!-- LE BOUTON DE CONTACT. 👉 Change le texte "Me contacter" si tu veux. -->
+      <a href="#contact" class="nav__cta">
+        Me contacter
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+
+      <!-- Bouton hamburger (téléphone). Ne pas modifier. -->
+      <button class="nav__burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span></button>
+
+      <!-- Menu déroulant sur téléphone (mêmes liens). Garde-le synchronisé avec ci-dessus. -->
+      <div class="nav__panel" id="navPanel">
+        <a href="#top" class="is-active">Accueil</a>
+        <a href="#apropos">À propos</a>
+        <a href="#competences">Compétences</a>
+        <a href="#projets">Projets</a>
+        <a href="#contact" class="nav__cta-mobile">Me contacter →</a>
+      </div>
+    </nav>
+  </div>
+
+
+  <!-- ╔══════════════════════════════════════════════════════════════════╗
+       ║  STRUCTURE DU HÉROS (la grande zone du haut, en 2 colonnes)        ║
+       ║  Gauche = textes  |  Droite = nom + photo + cartes                 ║
+       ╚══════════════════════════════════════════════════════════════════╝ -->
+  <style>
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr; /* 👈 largeur des 2 colonnes (gauche un peu + large) */
+      align-items: center;               /* aligne verticalement au centre */
+      gap: clamp(32px, 5vw, 72px);       /* 👈 espace entre les 2 colonnes */
+      min-height: 100vh;                 /* occupe toute la hauteur de l'écran */
+      padding: clamp(110px, 16vh, 168px) 0 clamp(56px, 8vh, 88px); /* espace haut/bas */
+    }
+  </style>
+
+  <main class="container" id="top">
+    <section class="hero">
+
+      <!-- ╔════════════════════════════════════════════════════════════╗
+           ║  BLOC 2 — COLONNE DE GAUCHE (tous les textes + boutons)       ║
+           ╚════════════════════════════════════════════════════════════╝ -->
+
+      <!-- ░░░ STYLE DU BLOC 2 ░░░ -->
+      <style>
+        .hero-left { max-width: 600px; }
+
+        /* (a) La petite étiquette du haut "✦ Analyste Financier..." */
+        .eyebrow {
+          display: inline-flex; align-items: center; gap: 8px;
+          padding: 6px 13px 6px 11px;
+          border-radius: 999px;
+          background: #fff;
+          border: 1px solid rgba(42,18,87,.10);
+          box-shadow: 0 2px 8px rgba(42,18,87,.05);
+          font-size: 12.5px;          /* 👈 taille du texte de l'étiquette */
+          font-weight: 600;
+          color: var(--violet);       /* 👈 couleur du texte de l'étiquette */
+        }
+        .eyebrow .spark { color: var(--violet-moyen); font-size: 14px; } /* l'étoile ✦ */
+
+        /* (b) LE GRAND TITRE */
+        .hero-title {
+          font-family: var(--police-titres);
+          font-weight: 625;            /* épaisseur (100 fin → 900 très gras) */
+          font-size: clamp(2.05rem, 1.3rem + 2.9vw, 2.10rem); /* 👈 TAILLE du titre.
+              clamp(mini, auto, maxi) = s'adapte à l'écran. Pour un titre plus gros,
+              augmente le dernier nombre (3.35rem). 1rem = 16px environ. */
+          line-height: 1;           /* hauteur de ligne */
+          letter-spacing: -.04em;      /* espace entre lettres (négatif = + serré) */
+          color: var(--texte-fonce);   /* 👈 couleur du titre */
+          margin-top: 15px;            /* espace au-dessus du titre */
+          max-width: 25ch;             /* largeur avant retour à la ligne (en caractères) */
+        }
+        /* Le mot mis en avant "décisions" (violet + surligné) */
+        .hero-title .hl { position: relative; color: var(--violet); white-space: nowrap; }
+        .hero-title .hl::after {  /* la barre violette sous le mot */
+          content: '';
+          position: absolute; left: -2px; right: -2px; bottom: 2px;
+          height: .30em; border-radius: 4px; z-index: -1; opacity: .55;
+          background: linear-gradient(90deg, var(--violet-pastel), var(--violet-clair));
+        }
+        .hero-title .lets { color: var(--violet); } /* "Parlons-en." en violet */
+
+        /* (c) LE PARAGRAPHE sous le titre */
+        .hero-lead {
+          margin-top: 22px;            /* espace au-dessus du paragraphe */
+          font-size: clamp(.96rem, .9rem + .25vw, 1.08rem); /* 👈 taille du paragraphe */
+          line-height: 1.62;           /* espace entre les lignes (lisibilité) */
+          color: var(--texte);         /* 👈 couleur du paragraphe */
+          max-width: 52ch;             /* largeur de lecture confortable */
+        }
+
+        /* (d) LES BOUTONS (Voir mes projets / Me contacter) */
+        .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+
+        .btn-primary {  /* bouton plein violet */
+          display: inline-flex; align-items: center; gap: 10px;
+          padding: 15px 26px;          /* 👈 taille du bouton (hauteur, largeur) */
+          border-radius: 14px;         /* 👈 arrondi des coins */
+          background: linear-gradient(135deg, var(--violet-clair), var(--violet-fonce)); /* 👈 couleur */
+          color: #fff;
+          font-size: 15px; font-weight: 600;
+          box-shadow: 0 14px 40px rgba(124,58,237,.45);
+          transition: transform .25s, box-shadow .25s, filter .25s;
+        }
+        .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.05); }
+        .btn-primary svg { width: 17px; height: 17px; transition: transform .3s; }
+        .btn-primary:hover svg { transform: translateX(4px); } /* la flèche avance au survol */
+
+        .btn-ghost {  /* bouton blanc avec contour */
+          display: inline-flex; align-items: center; gap: 9px;
+          padding: 15px 22px; border-radius: 14px;
+          background: #fff;
+          border: 1px solid rgba(42,18,87,.10);
+          color: var(--texte-fonce);
+          font-size: 15px; font-weight: 600;
+          box-shadow: 0 2px 8px rgba(42,18,87,.05);
+          transition: transform .25s, box-shadow .25s, border-color .25s;
+        }
+        .btn-ghost:hover { transform: translateY(-2px); border-color: var(--violet-pastel); }
+        .btn-ghost svg { width: 16px; height: 16px; color: var(--violet); }
+
+        /* (e) LES CERTIFICATIONS (petites pastilles) */
+        .certs { margin-top: 38px; }
+        .certs__label {
+          font-size: 11px; font-weight: 700;
+          letter-spacing: .14em; text-transform: uppercase; /* MAJUSCULES espacées */
+          color: var(--texte-gris); margin-bottom: 13px;
+        }
+        .certs__list { display: flex; flex-wrap: wrap; gap: 9px; } /* wrap = passe à la ligne si besoin */
+        .cert {
+          display: inline-flex; align-items: center; gap: 7px;
+          padding: 8px 14px; border-radius: 999px;
+          background: #fff; border: 1px solid rgba(42,18,87,.10);
+          box-shadow: 0 2px 8px rgba(42,18,87,.05);
+          font-size: 13px; font-weight: 600;    /* 👈 taille du texte des pastilles */
+          color: #46395F;
+          transition: transform .25s, box-shadow .25s;
+        }
+        .cert:hover { transform: translateY(-2px); }
+        .cert .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--violet-moyen); }
+      </style>
+
+      <!-- ░░░ CONTENU DU BLOC 2 ░░░ -->
+      <div class="hero-left">
+
+        <!-- (a) ÉTIQUETTE DU HAUT. 👉 Change le texte. Pour la supprimer : efface tout le <span>. -->
+
+
+        <!-- (b) GRAND TITRE.
+             👉 Écris ton texte directement entre <h1> et </h1>.
+             👉 Le mot violet souligné est dans <span class="hl">...</span>.
+             👉 La fin violette est dans <span class="lets">...</span>. -->
+        <h1 class="hero-title">
+          Vous cherchez un analyste capable de transformer vos données en <span class="hl">décisions</span> ? <span class="lets">Parlons‑en.</span>
+        </h1>
+
+        <!-- (c) PARAGRAPHE. 👉 Change le texte entre <p> et </p>. -->
+        <p class="hero-lead">
+          Passionné par la finance et la data, je conçois des tableaux de bord clairs et des modèles financiers robustes pour guider les dirigeants et investisseurs. Mon objectif : rendre la donnée accessible et actionnable.
+        </p>
+
+        <!-- (d) BOUTONS.
+             👉 Pour supprimer un bouton : efface toute sa ligne <a ...>...</a>. -->
+        <div class="hero-actions">
+          <a href="#projets" class="btn-primary">
+            Voir mes projets
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+         
+        </div>
+
+        <!-- (e) CERTIFICATIONS.
+             👉 Pour AJOUTER une certif : copie une ligne <span class="cert">...</span>.
+             👉 Pour en SUPPRIMER une : efface sa ligne.
+             👉 Pour cacher tout le bloc : efface tout le <div class="certs">...</div>. -->
+        <div class="certs">
+          <div class="certs__label">Mes certifications</div>
+          <div class="certs__list">
+            <span class="cert"><span class="dot"></span>PL-300</span>
+            <span class="cert"><span class="dot"></span>FMVA</span>
+            <span class="cert"><span class="dot"></span>Business Foundations — Wharton</span>
+            <span class="cert"><span class="dot"></span>Excel Avancé</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ╔════════════════════════════════════════════════════════════╗
+           ║  BLOC 3 — COLONNE DE DROITE (nom + titre, puis photo+cartes) ║
+           ╚════════════════════════════════════════════════════════════╝ -->
+
+      <!-- ░░░ STYLE : le nom + le titre (placés en HAUT À DROITE) ░░░ -->
+      <style>
+        .hero-right { display: flex; flex-direction: column; align-items: flex-end; }
+        /* "align-items: flex-end" = tout est collé à DROITE. Mets "center" pour centrer. */
+
+        .identity {
+          width: min(540px, 100%);
+          display: flex; align-items: center; gap: 13px;
+          justify-content: flex-end; text-align: right;
+          margin-bottom: 20px;        /* 👈 espace entre le nom et la photo */
+        }
+        .identity__text { display: flex; flex-direction: column; gap: 5px; align-items: flex-end; }
+        .identity__name {
+          font-family: var(--police-titres);
+          font-weight: 800;
+          font-size: clamp(1.05rem, .95rem + .5vw, 1.35rem); /* 👈 taille du NOM */
+          color: var(--texte-fonce);                          /* 👈 couleur du nom */
+          line-height: 1.1;
+        }
+        .identity__role-row { display: flex; align-items: center; gap: 10px; }
+        .identity__role {
+          font-size: 12px; font-weight: 700;
+          letter-spacing: .10em; text-transform: uppercase;
+          color: var(--violet);       /* 👈 couleur du titre "Analyste..." */
+        }
+        /* La pastille verte "Disponible" */
+        .badge-avail {
+          display: inline-flex; align-items: center; gap: 6px;
+          padding: 4px 10px; border-radius: 999px;
+          background: #F0FDF4; border: 1px solid rgba(34,197,94,.25);
+          font-size: 11px; font-weight: 700; color: var(--vert);
+          white-space: nowrap;
+        }
+        .badge-avail .dot {
+          width: 6px; height: 6px; border-radius: 50%; background: var(--vert-point);
+          animation: pulsation 2.2s ease-in-out infinite; /* le point qui pulse */
+        }
+      </style>
+
+      <!-- ░░░ CONTENU : nom + titre ░░░ -->
+      <div class="hero-right">
+
+        <!-- LE NOM ET LE TITRE.
+             👉 Change "Souleymane Maman Moustapha" et "Analyste Financier & Data".
+             👉 Pour enlever "Disponible" : efface le <span class="badge-avail">...</span>. -->
+        <div class="identity">
+          <div class="identity__text">
+            <span class="identity__name">Souleymane Maman Moustapha</span>
+            <div class="identity__role-row">
+              <span class="identity__role">Analyste Financier &amp; Data</span>
+             
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ░░░ STYLE : le collage (la photo + le halo derrière) ░░░ -->
+        <style>
+          .collage {
+            position: relative;          /* les cartes se positionnent PAR RAPPORT à cette zone */
+            width: min(540px, 100%);     /* 👈 largeur de tout le collage */
+            aspect-ratio: 540 / 540;     /* zone carrée */
+          }
+          /* Le halo violet flou derrière la photo */
+          .collage__halo {
+            position: absolute; inset: 6% 4% 4% 6%;
+            border-radius: 50%;
+            background: radial-gradient(circle at 55% 45%, rgba(124,58,237,.28), rgba(58,33,86,.05) 56%, transparent 72%);
+            filter: blur(4px);
+          }
+          /* LA PHOTO (ta photo) */
+          .photo {
+            position: absolute;
+            top: 3%; right: 4%;          /* 👈 position de la photo dans la zone */
+            width: 64%;                  /* 👈 LARGEUR de la photo (agrandis: 70%, réduis: 58%) */
+            height: 90%;                 /* 👈 HAUTEUR de la photo */
+            border-radius: 26px;         /* 👈 arrondi des coins de la photo */
+            overflow: hidden;
+            border: 6px solid #fff;      /* 👈 le cadre blanc autour (mets 0 pour l'enlever) */
+            box-shadow: 0 30px 64px rgba(46,16,80,.26);
+            transform: rotate(2.4deg);   /* 👈 légère inclinaison (mets 0deg pour droit) */
+            background: linear-gradient(150deg, var(--violet-clair), var(--violet-fonce));
+          }
+          .photo img {
+            width: 100%; height: 100%;
+            object-fit: cover;           /* la photo remplit le cadre sans se déformer */
+            object-position: center 22%; /* 👈 quelle partie de la photo montrer (haut/bas) */
+          }
+        </style>
+
+        <!-- ░░░ CONTENU : le collage ░░░ -->
+        <div class="collage">
+
+          <!-- Halo décoratif (ne contient pas de texte). -->
+          <div class="collage__halo"></div>
+
+          <!-- TA PHOTO.
+               👉 Le fichier est dans le dossier "assets" et s'appelle "portrait.png".
+               👉 Pour changer de photo : remplace le fichier assets/portrait.png
+                  par ta nouvelle photo (garde EXACTEMENT le même nom). -->
+          <div class="photo">
+            <img src="assets/portrait.png" alt="Portrait de Souleymane Maman Moustapha">
+          </div>
+
+
+          <!-- ╔══════════════════════════════════════════════════════════╗
+               ║  BLOC 4 — CARTE 1 : "Marge nette +18,4 %"                  ║
+               ╚══════════════════════════════════════════════════════════╝ -->
+
+          <!-- ░░░ STYLE CARTE 1 ░░░ -->
+          <style>
+            /* Style COMMUN à toutes les cartes flottantes (fond blanc, ombre, survol). */
+            .fcard {
+              position: absolute;          /* posée par-dessus la photo */
+              background: rgba(255,255,255,.92);
+              backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+              border: 1px solid rgba(255,255,255,.7);
+              border-radius: 18px;         /* 👈 arrondi des cartes */
+              box-shadow: 0 18px 44px rgba(46,16,80,.16);
+              padding: 14px 16px;          /* 👈 espace intérieur des cartes */
+              z-index: 3;
+              transition: transform .45s, box-shadow .45s; /* mouvement doux au survol */
+            }
+            /* QUAND LA SOURIS PASSE SUR UNE CARTE : elle se redresse, se soulève, grandit. */
+            .fcard:hover {
+              transform: rotate(0deg) translateY(-9px) scale(1.045) !important;
+              box-shadow: 0 30px 64px rgba(46,16,80,.26);
+              z-index: 6;
+            }
+            .fc-head { display: flex; align-items: center; gap: 9px; }
+            .fc-icon {
+              width: 30px; height: 30px; border-radius: 9px;
+              background: var(--violet-tres-clair);
+              display: grid; place-items: center; color: var(--violet);
+            }
+            .fc-icon svg { width: 16px; height: 16px; }
+            .fc-label { font-size: 11.5px; font-weight: 600; color: #8A7FA6; } /* petit titre gris */
+
+            /* Position + flottement de la CARTE 1 */
+            .card-marge {
+              top: 7%; left: -3%;          /* 👈 position de la carte 1 */
+              width: clamp(176px, 39%, 210px); /* 👈 largeur de la carte 1 */
+              transform: rotate(-3.5deg);  /* 👈 inclinaison */
+              animation: flottement 6.5s ease-in-out infinite; /* 👈 VITESSE du flottement (6.5s) */
+            }
+            .card-marge .row { display: flex; align-items: flex-end; justify-content: space-between; margin-top: 11px; gap: 8px; }
+            .card-marge .val { font-family: var(--police-titres); font-weight: 800; font-size: 19px; color: var(--texte-fonce); } /* 👈 le "+18,4 %" */
+          </style>
+
+          <!-- ░░░ CONTENU CARTE 1 ░░░
+               👉 Change "Marge nette" et "+18,4 %".
+               👉 Pour supprimer cette carte : efface tout le <div class="fcard card-marge">...</div>. -->
+          <div class="fcard card-marge">
+            <div class="fc-head">
+              <span class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18L10 11l4 4 6-8"/><path d="M20 7h-4M20 7v4"/></svg></span>
+              <span class="fc-label">Marge nette</span>
+            </div>
+            <div class="row">
+              <span class="val">+18,4&nbsp;%</span>
+              <!-- petite courbe décorative -->
+              <svg width="78" height="28" viewBox="0 0 78 28">
+                <polyline points="0,23 15,19 30,21 45,11 60,14 78,4" fill="none" stroke="#7C3AED" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+
+
+          <!-- ╔══════════════════════════════════════════════════════════╗
+               ║  BLOC 5 — CARTE 2 : "Tableau de bord PME — 24 indicateurs" ║
+               ╚══════════════════════════════════════════════════════════╝ -->
+
+          <!-- ░░░ STYLE CARTE 2 ░░░ -->
+          <style>
+            .card-dash {
+              bottom: 3%; left: -1%;       /* 👈 position de la carte 2 */
+              width: clamp(216px, 48%, 256px); /* 👈 largeur de la carte 2 */
+              transform: rotate(1.5deg);   /* 👈 inclinaison */
+              animation: flottement 7.8s ease-in-out infinite .6s; /* 👈 vitesse (7.8s), démarre 0.6s après */
+            }
+            .card-dash .head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+            .card-dash .title { font-family: var(--police-titres); font-weight: 700; font-size: 13.5px; color: var(--texte-fonce); }
+            .pill-live { /* la pastille "À l'instant" */
+              font-size: 10px; font-weight: 700; color: var(--violet);
+              background: var(--violet-tres-clair); padding: 4px 9px; border-radius: 999px; white-space: nowrap;
+            }
+            .card-dash .body { display: flex; align-items: flex-end; gap: 14px; margin-top: 13px; }
+            .kpi-num { font-family: var(--police-titres); font-weight: 800; font-size: 25px; color: var(--texte-fonce); line-height: 1; } /* 👈 le grand "24" */
+            .kpi-lab { font-size: 10.5px; font-weight: 500; color: #8A7FA6; margin-top: 5px; }
+          </style>
+
+          <!-- ░░░ CONTENU CARTE 2 ░░░
+               👉 Change "Tableau de bord PME", "24", "indicateurs suivis".
+               👉 Pour supprimer cette carte : efface tout son <div class="fcard card-dash">...</div>. -->
+          <div class="fcard card-dash">
+            <div class="head">
+              <span class="title">Tableau de bord PME</span>
+              <span class="pill-live">À l'instant</span>
+            </div>
+            <div class="body">
+              <div>
+                <div class="kpi-num">24</div>
+                <div class="kpi-lab">indicateurs<br>suivis</div>
+              </div>
+              <!-- petites barres décoratives -->
+              <svg width="132" height="48" viewBox="0 0 132 48" style="margin-left:auto;">
+                <rect x="0"   y="28" width="15" height="20" rx="3" fill="#E1D5F7"/>
+                <rect x="25"  y="20" width="15" height="28" rx="3" fill="#C3A9EF"/>
+                <rect x="50"  y="24" width="15" height="24" rx="3" fill="#C3A9EF"/>
+                <rect x="75"  y="12" width="15" height="36" rx="3" fill="#8B5CF6"/>
+                <rect x="100" y="4"  width="15" height="44" rx="3" fill="#6D28D9"/>
+              </svg>
+            </div>
+          </div>
+
+
+          <!-- ╔══════════════════════════════════════════════════════════╗
+               ║  BLOC 6 — CARTE 3 : jauge ronde "94 % Précision"           ║
+               ╚══════════════════════════════════════════════════════════╝ -->
+
+          <!-- ░░░ STYLE CARTE 3 ░░░ -->
+          <style>
+            .card-gauge {
+              top: 49%; right: -5%;        /* 👈 position de la carte 3 */
+              width: clamp(132px, 30%, 158px); /* 👈 largeur de la carte 3 */
+              transform: rotate(4deg);     /* 👈 inclinaison */
+              animation: flottement 7s ease-in-out infinite 1.1s; /* 👈 vitesse (7s) */
+              text-align: center;
+            }
+            .gauge-wrap { position: relative; width: 84px; height: 84px; margin: 4px auto 2px; }
+            .gauge-wrap svg { transform: rotate(-90deg); } /* fait démarrer la jauge en haut */
+            .gauge-track { fill: none; stroke: var(--violet-tres-clair); stroke-width: 9; } /* anneau gris clair */
+            .gauge-fill {  /* l'anneau violet qui se remplit jusqu'à 94 % */
+              fill: none; stroke: url(#gaugeGrad); stroke-width: 9; stroke-linecap: round;
+              stroke-dasharray: 226.2; stroke-dashoffset: 226.2;
+              animation: dessine-jauge 1.6s ease .5s forwards;
+            }
+            .gauge-num { /* le "94%" au centre */
+              position: absolute; inset: 0; display: grid; place-items: center;
+              font-family: var(--police-titres); font-weight: 800; font-size: 18px; color: var(--texte-fonce);
+            }
+            .card-gauge .cap { font-size: 11px; font-weight: 600; color: #8A7FA6; line-height: 1.3; }
+          </style>
+
+          <!-- ░░░ CONTENU CARTE 3 ░░░
+               👉 Change "94%" et "Précision des prévisions".
+               ⚠️ Si tu changes le pourcentage, le remplissage de l'anneau ne suit pas
+                  automatiquement (c'est un détail technique) — demande-moi si besoin.
+               👉 Pour supprimer cette carte : efface tout son <div class="fcard card-gauge">...</div>. -->
+          <div class="fcard card-gauge">
+            <div class="gauge-wrap">
+              <svg width="84" height="84" viewBox="0 0 84 84">
+                <defs>
+                  <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#A78BFA"/>
+                    <stop offset="1" stop-color="#6D28D9"/>
+                  </linearGradient>
+                </defs>
+                <circle class="gauge-track" cx="42" cy="42" r="36"/>
+                <circle class="gauge-fill"  cx="42" cy="42" r="36"/>
+              </svg>
+              <span class="gauge-num">94%</span>
+            </div>
+            <span class="cap">Précision des<br>prévisions</span>
+          </div>
+
+        </div><!-- fin .collage -->
+      </div><!-- fin .hero-right -->
+
+    </section>
+  </main>
+
+
+  <!-- ╔══════════════════════════════════════════════════════════════════╗
+       ║  BLOC 7 — SECTION "MES COMPÉTENCES"                                 ║
+       ║  Deux parties :                                                    ║
+       ║    A) Logiciels que je maîtrise (logos qui défilent)               ║
+       ║    B) Mes compétences analytiques (grille de cartes)               ║
+       ╚══════════════════════════════════════════════════════════════════╝ -->
+
+  <!-- ░░░ STYLE : en-tête de la section + mise en page générale ░░░ -->
+  <style>
+    .comp {
+      padding: clamp(64px, 10vh, 110px) 0;  /* 👈 espace au-dessus/dessous de la section */
+      scroll-margin-top: 100px;             /* décale l'arrivée pour ne pas passer sous la barre du menu */
+    }
+    /* L'en-tête centré (étiquette + titre + sous-titre) */
+    .comp__head {
+      max-width: 660px; margin: 0 auto;
+      text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 16px;
+    }
+    .comp__title {
+      font-family: var(--police-titres);
+      font-weight: 800;
+      font-size: clamp(1.8rem, 1.2rem + 2vw, 2.6rem); /* 👈 taille du titre de section */
+      line-height: 1.1; letter-spacing: -.02em;
+      color: var(--texte-fonce);                       /* 👈 couleur du titre */
+    }
+    .comp__subtitle {
+      font-size: clamp(.95rem, .9rem + .2vw, 1.05rem); /* 👈 taille du sous-titre */
+      line-height: 1.6; color: var(--texte); max-width: 54ch;
+    }
+
+    /* Petit titre au-dessus de chaque partie (ex: "Logiciels que je maîtrise") */
+    .comp__block { margin-top: clamp(34px, 6vh, 56px); } /* 👈 espace entre les 2 parties */
+    .comp__block-title {
+      font-family: var(--police-titres); font-weight: 700;
+      font-size: 1.1rem;                  /* 👈 taille des petits titres de partie */
+      color: var(--texte-fonce);
+      margin-bottom: 18px;                /* espace sous le petit titre */
+      display: flex; align-items: center; gap: 10px;
+    }
+    .comp__block-title .tag {  /* la petite pastille violette qui compte les éléments */
+      font-size: 12px; font-weight: 700; color: var(--violet);
+      background: var(--violet-tres-clair); padding: 4px 10px; border-radius: 999px;
+    }
+  </style>
+
+  <section id="competences" class="comp container">
+
+    <!-- L'EN-TÊTE.
+         👉 Change l'étiquette, le titre et le sous-titre librement. -->
+    <div class="comp__head">
+      <span class="eyebrow"><span class="spark">✦</span> Compétences</span>
+      <h2 class="comp__title">Les outils et l'expertise qui transforment vos données</h2>
+      <p class="comp__subtitle">Une boîte à outils complète, de la donnée brute à la décision : maîtrise logicielle et savoir-faire analytique.</p>
+    </div>
+
+
+    <!-- ════════════════════════════════════════════════════════════════
+         PARTIE A — LOGICIELS QUE JE MAÎTRISE (logos en défilement)
+         ════════════════════════════════════════════════════════════════ -->
+
+    <!-- ░░░ STYLE PARTIE A ░░░ -->
+    <style>
+      /* Le "ruban" qui cache ce qui dépasse et fait un dégradé sur les bords. */
+      .marquee {
+        overflow: hidden; padding: 6px 0;
+        -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+        mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+      }
+      /* La "piste" qui glisse vers la gauche, en boucle, à l'infini. */
+      .marquee__track {
+        display: flex; width: max-content;
+        animation: defilement 42s linear infinite; /* 👈 VITESSE : plus le nombre est GRAND, plus c'est LENT (42s) */
+      }
+      /* Au survol de la souris, le défilement se met en PAUSE. */
+      .marquee:hover .marquee__track { animation-play-state: paused; }
+
+      @keyframes defilement {
+        from { transform: translateX(0); }
+        to   { transform: translateX(-50%); }
+      }
+
+      /* Une "étiquette logiciel" = un logo + un nom. */
+      .soft-chip {
+        display: inline-flex; align-items: center; gap: 12px;
+        margin-right: 14px;          /* 👈 espace entre chaque logiciel */
+        padding: 10px 18px 10px 10px;
+        background: #fff;
+        border: 1px solid rgba(42,18,87,.08);
+        border-radius: 16px;
+        box-shadow: 0 6px 18px rgba(46,16,80,.07);
+      }
+      .soft-name {
+        font-family: var(--police-texte); font-weight: 600;
+        font-size: 15px;             /* 👈 taille du nom du logiciel */
+        color: var(--texte-fonce); white-space: nowrap;
+      }
+
+      /* LE LOGO (petite tuile carrée arrondie). Taille commune à tous : */
+      .soft-logo {
+        width: 44px; height: 44px;   /* 👈 taille des logos */
+        flex-shrink: 0; border-radius: 12px;
+        display: grid; place-items: center;
+        color: #fff; font-family: var(--police-titres); font-weight: 800; font-size: 20px;
+        box-shadow: 0 4px 12px rgba(46,16,80,.16);
+      }
+      .soft-logo svg { display: block; }
+
+      /* 👇 LA COULEUR DE CHAQUE LOGICIEL (couleurs officielles des marques).
+            Pour changer une couleur, modifie le code à droite. */
+      .soft-word    { background: #2B579A; }                                   /* Word    (bleu)   */
+      .soft-ppt     { background: #C43E1C; }                                   /* PowerPoint (orange) */
+      .soft-outlook { background: #0F6CBD; }                                   /* Outlook (bleu)   */
+      .soft-excel   { background: #217346; }                                   /* Excel   (vert)   */
+      .soft-access  { background: #A4373A; }                                   /* Access  (rouge)  */
+      .soft-powerbi { background: #F2C811; }                                   /* Power BI (jaune) */
+      .soft-dax     { background: #1A6E8E; font-style: italic; font-size: 17px; } /* DAX Studio (teal) */
+      .soft-sql     { background: #00688C; }                                   /* SQL     (bleu)   */
+      .soft-python  { background: linear-gradient(135deg, #3776AB 48%, #FFD43B 52%); font-size: 16px; } /* Python */
+      .soft-claude  { background: #D97757; }                                   /* Claude  (corail) */
+      .soft-notion  { background: #fff; color: #1A1A1A; border: 1px solid rgba(0,0,0,.12); } /* Notion (blanc) */
+    </style>
+
+    <!-- ░░░ CONTENU PARTIE A ░░░ -->
+    <div class="comp__block">
+      <h3 class="comp__block-title">Logiciels que je maîtrise <span class="tag">11</span></h3>
+
+      <!--
+        COMMENT AJOUTER / RETIRER UN LOGICIEL :
+        • Chaque logiciel = un bloc <div class="soft-chip"> ... </div>.
+        • Pour en RETIRER un : efface tout son bloc.
+        • Pour en AJOUTER un : copie un bloc existant, change la couleur
+          (ex: class="soft-logo soft-excel" → invente une classe et ajoute
+          sa couleur dans le STYLE ci-dessus), la lettre et le nom.
+        • Tu n'écris la liste QU'UNE SEULE FOIS : le site la duplique tout seul
+          pour faire défiler en boucle (c'est le petit programme tout en bas).
+      -->
+      <div class="marquee">
+        <div class="marquee__track">
+          <div class="soft-chip"><span class="soft-logo soft-word">W</span><span class="soft-name">Word</span></div>
+          <div class="soft-chip"><span class="soft-logo soft-ppt">P</span><span class="soft-name">PowerPoint</span></div>
+          <div class="soft-chip"><span class="soft-logo soft-outlook">O</span><span class="soft-name">Outlook</span></div>
+          <div class="soft-chip"><span class="soft-logo soft-excel">X</span><span class="soft-name">Excel Avancé</span></div>
+          <div class="soft-chip"><span class="soft-logo soft-access">A</span><span class="soft-name">Access</span></div>
+          <div class="soft-chip">
+            <span class="soft-logo soft-powerbi">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#3d2e00"><rect x="3" y="12" width="4" height="9" rx="1.2"/><rect x="10" y="7" width="4" height="14" rx="1.2"/><rect x="17" y="3" width="4" height="18" rx="1.2"/></svg>
+            </span>
+            <span class="soft-name">Power BI</span>
+          </div>
+          <div class="soft-chip"><span class="soft-logo soft-dax">fx</span><span class="soft-name">DAX Studio</span></div>
+          <div class="soft-chip">
+            <span class="soft-logo soft-sql">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/></svg>
+            </span>
+            <span class="soft-name">SQL</span>
+          </div>
+          <div class="soft-chip"><span class="soft-logo soft-python">Py</span><span class="soft-name">Python</span></div>
+          <div class="soft-chip">
+            <span class="soft-logo soft-claude">
+              <svg width="20" height="20" viewBox="0 0 24 24" stroke="#fff" stroke-width="2" stroke-linecap="round"><line x1="12" y1="3" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="21"/><line x1="3" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="21" y2="12"/><line x1="5.6" y1="5.6" x2="9.2" y2="9.2"/><line x1="14.8" y1="14.8" x2="18.4" y2="18.4"/><line x1="18.4" y1="5.6" x2="14.8" y2="9.2"/><line x1="9.2" y1="14.8" x2="5.6" y2="18.4"/></svg>
+            </span>
+            <span class="soft-name">Claude</span>
+          </div>
+          <div class="soft-chip"><span class="soft-logo soft-notion">N</span><span class="soft-name">Notion</span></div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ════════════════════════════════════════════════════════════════
+         PARTIE B — MES COMPÉTENCES ANALYTIQUES (grille de cartes)
+         ════════════════════════════════════════════════════════════════ -->
+
+    <!-- ░░░ STYLE PARTIE B ░░░ -->
+    <style>
+      .analytics__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 👈 3 cartes par ligne (sur grand écran) */
+        gap: 14px;                             /* 👈 espace entre les cartes */
+      }
+      .skill-card {
+        display: flex; align-items: flex-start; gap: 14px;
+        padding: 20px;                         /* 👈 espace intérieur des cartes */
+        background: #fff;
+        border: 1px solid rgba(42,18,87,.08);
+        border-radius: 18px;                   /* 👈 arrondi des cartes */
+        box-shadow: 0 6px 18px rgba(46,16,80,.06);
+        transition: transform .25s, box-shadow .25s, border-color .25s;
+      }
+      /* Au survol : la carte se soulève. */
+      .skill-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--violet-pastel);
+        box-shadow: 0 18px 40px rgba(46,16,80,.14);
+      }
+      /* Le petit numéro violet (01, 02, ...) */
+      .skill-card__num {
+        flex-shrink: 0; width: 42px; height: 42px; border-radius: 12px;
+        display: grid; place-items: center;
+        background: linear-gradient(140deg, var(--violet-pastel), var(--violet) 75%);
+        color: #fff; font-family: var(--police-titres); font-weight: 800; font-size: 15px;
+        box-shadow: 0 6px 16px rgba(124,58,237,.35);
+      }
+      .skill-card__title {
+        font-family: var(--police-titres); font-weight: 700;
+        font-size: 15.5px;                     /* 👈 taille du nom de la compétence */
+        color: var(--texte-fonce); line-height: 1.25;
+      }
+      .skill-card__desc {
+        margin-top: 5px;
+        font-size: 13px;                       /* 👈 taille de la petite description */
+        line-height: 1.5; color: var(--texte);
+      }
+
+      /* Sur tablette : 2 cartes par ligne. Sur téléphone : 1 par ligne. */
+      @media (max-width: 900px) { .analytics__grid { grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width: 560px) {
+        .analytics__grid { grid-template-columns: 1fr; }
+        .soft-logo { width: 40px; height: 40px; font-size: 18px; }
+        .soft-name { font-size: 14px; }
+      }
+    </style>
+
+    <!-- ░░░ CONTENU PARTIE B ░░░ -->
+    <div class="comp__block">
+      <h3 class="comp__block-title">Mes compétences analytiques <span class="tag">9</span></h3>
+
+      <!--
+        CHAQUE COMPÉTENCE = un bloc <div class="skill-card"> ... </div>.
+        👉 Change le numéro, le titre et la description.
+        👉 Pour en RETIRER une : efface tout son bloc.
+        👉 Pour en AJOUTER une : copie un bloc et change le contenu.
+        👉 Pour enlever la description : efface la ligne <p class="skill-card__desc">.
+      -->
+      <div class="analytics__grid">
+
+        <div class="skill-card">
+          <span class="skill-card__num">01</span>
+          <div>
+            <p class="skill-card__title">Modélisation financière à 3 États</p>
+            <p class="skill-card__desc">Compte de résultat, bilan et flux de trésorerie entièrement reliés.</p>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <span class="skill-card__num">02</span>
+          <div>
+            <p class="skill-card__title">DCF — Flux de trésorerie actualisés</p>
+            <p class="skill-card__desc">Valorisation d'entreprise par l'actualisation des flux futurs.</p>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <span class="skill-card__num">03</span>
+          <div>
+            <p class="skill-card__title">Budgétisation</p>
+            <p class="skill-card__desc">Élaboration, cadrage et suivi rigoureux des budgets.</p>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <span class="skill-card__num">04</span>
+          <div>
+            <p class="skill-card__title">Prévision</p>
+            <p class="skill-card__desc">Projections et scénarios pour anticiper l'activité.</p>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <span class="skill-card__num">05</span>
+          <div>
+            <p class="skill-card__title">Analyse des états financiers</p>
+            <p class="skill-card__desc">Lecture, ratios et diagnostic de la santé financière.</p>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <span class="skill-card__num">06</span>
+          <div>
+            <p class="skill-card__title">Analyse des écarts</p>
+            <p class="skill-card__desc">Comparaison budget / réel et explication des variations.</p>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <span class="skill-card__num">07</span>
+          <div>
+            <p class="skill-card__title">Reporting</p>
+            <p class="skill-card__desc">Tableaux de bord clairs et indicateurs de pilotage.</p>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <span class="skill-card__num">08</span>
+          <div>
+            <p class="skill-card__title">Rapport de synthèse</p>
+            <p class="skill-card__desc">Notes de synthèse orientées prise de décision.</p>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <span class="skill-card__num">09</span>
+          <div>
+            <p class="skill-card__title">Conception de pitch deck</p>
+            <p class="skill-card__desc">Présentations investisseurs claires et convaincantes.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ╔══════════════════════════════════════════════════════════════════╗
+       ║  ADAPTATION TÉLÉPHONE & TABLETTE  (le site se réorganise)          ║
+       ║  ⚠️ Partie un peu plus technique. Modifie avec prudence.           ║
+       ║  Idée : "@media (max-width: 960px)" = "quand l'écran fait moins    ║
+       ║  de 960 pixels de large, applique ces réglages".                   ║
+       ╚══════════════════════════════════════════════════════════════════╝ -->
+  <style>
+    /* ----- TABLETTE et petits ordinateurs (écran < 960px) ----- */
+    @media (max-width: 960px) {
+      .nav__name { display: none; }            /* cache le prénom dans la barre */
+
+      .hero {
+        grid-template-columns: 1fr;            /* les 2 colonnes passent l'une SOUS l'autre */
+        gap: clamp(36px, 8vw, 56px);
+        min-height: auto;
+        padding-top: clamp(104px, 18vh, 140px);
+        text-align: center;                    /* textes centrés */
+      }
+      .hero-left { display: flex; flex-direction: column; align-items: center; }
+      .hero-title { max-width: 18ch; }
+      .hero-lead { margin-left: auto; margin-right: auto; }
+      .certs__list { justify-content: center; }
+
+      .hero-right { align-items: center; }
+      .identity { justify-content: center; text-align: center; }
+      .identity__text { align-items: center; }
+      .collage { margin: 0 auto; }
+    }
+
+    /* ----- TÉLÉPHONE (écran < 760px) : on montre le menu hamburger ----- */
+    @media (max-width: 760px) {
+      .nav__links { display: none; }           /* cache les liens en ligne */
+      .nav__cta   { display: none; }           /* cache le bouton (il revient dans le menu déroulant) */
+      .nav__burger { display: grid; place-items: center; } /* montre le hamburger */
+      .nav { padding: 7px 7px 7px 12px; }
+
+      /* Le menu qui s'ouvre quand on touche le hamburger */
+      .nav__panel {
+        position: absolute; top: calc(100% + 12px); left: 16px; right: 16px;
+        background: linear-gradient(135deg, rgba(40,18,84,.92), rgba(24,10,52,.92));
+        backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(167,139,250,.20);
+        border-radius: 22px; box-shadow: 0 24px 50px rgba(20,8,45,.5);
+        padding: 12px; display: flex; flex-direction: column; gap: 4px;
+        opacity: 0; transform: translateY(-10px) scale(.98);
+        pointer-events: none; transition: opacity .3s, transform .3s;
+      }
+      .nav.is-open .nav__panel { opacity: 1; transform: none; pointer-events: auto; }
+      .nav__panel a { padding: 13px 16px; border-radius: 14px; color: rgba(255,255,255,.85); font-size: 15px; font-weight: 500; }
+      .nav__panel a:hover, .nav__panel a.is-active { background: rgba(167,139,250,.16); color: #fff; }
+      .nav__panel .nav__cta-mobile {
+        margin-top: 6px; padding: 14px; text-align: center; border-radius: 14px;
+        background: linear-gradient(135deg, var(--violet-clair), var(--violet)); color: #fff; font-weight: 600;
+      }
+    }
+    @media (min-width: 761px) { .nav__panel { display: none; } } /* sur grand écran, jamais de menu déroulant */
+
+    /* ----- PETIT TÉLÉPHONE (écran < 540px) : on réduit un peu ----- */
+    @media (max-width: 540px) {
+      .hero-actions { width: 100%; }
+      .btn-primary, .btn-ghost { flex: 1; justify-content: center; } /* boutons sur toute la largeur */
+      .collage { width: min(420px, 96vw); }
+      .card-marge { width: clamp(150px, 44%, 188px); }
+      .card-dash  { width: clamp(190px, 56%, 230px); }
+      .card-gauge { width: clamp(118px, 33%, 140px); }
+    }
+  </style>
+
+
+  <!-- ╔══════════════════════════════════════════════════════════════════╗
+       ║  PETIT PROGRAMME (JavaScript) — uniquement pour OUVRIR/FERMER le    ║
+       ║  menu hamburger sur téléphone.                                      ║
+       ║  ⚠️ Tu n'as PAS besoin de toucher à cette partie.                   ║
+       ╚══════════════════════════════════════════════════════════════════╝ -->
+  <script>
+    var nav = document.getElementById('nav');
+    var burger = document.getElementById('burger');
+    burger.addEventListener('click', function () {
+      var ouvert = nav.classList.toggle('is-open');
+      burger.setAttribute('aria-expanded', ouvert ? 'true' : 'false');
+    });
+    // Referme le menu quand on clique sur un lien.
+    document.querySelectorAll('#navPanel a').forEach(function (lien) {
+      lien.addEventListener('click', function () {
+        nav.classList.remove('is-open');
+        burger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Duplique automatiquement les logos pour un défilement sans fin.
+    // (Tu écris la liste UNE seule fois dans le HTML, ce code la recopie.)
+    document.querySelectorAll('.marquee__track').forEach(function (track) {
+      var originaux = track.querySelectorAll('.soft-chip');
+      originaux.forEach(function (chip) {
+        var copie = chip.cloneNode(true);
+        copie.setAttribute('aria-hidden', 'true'); // copie ignorée par les lecteurs d'écran
+        track.appendChild(copie);
+      });
+    });
+  </script>
+
+</body>
+</html>
